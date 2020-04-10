@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Projet Chess Online</title>
+        <!--  Including bootstrap :-->
+        <link rel="stylesheet" 
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" 
+                integrity="sha384 ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <!-- Including Chess.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.2/chess.js"></script>
+        <!-- Including the chessboardjs files :-->
+        <script src="./chessboard/js/chessboard-0.3.0.min.js"></script>
+        <link rel="stylesheet" href="./chessboard/css/chessboard-0.3.0.min.css">
+        <style>
+            .number::-webkit-inner-spin-button, 
+            .number::-webkit-outer-spin-button { 
+                -webkit-appearance: none; 
+                margin: 0; 
+            }
+            #roomNumbers{
+
+            }
+            #messageForm{
+                display: none;
+            }
+            html{
+                height: 100%;
+                background-image: linear-gradient(to bottom right, #abbaab, white);
+            }
+            body{
+                margin: 4%;
+                background-color: transparent;
+            }
+            #canvas-container {
+                width: 100%;
+                text-align:center;
+
+            }
+            canvas {
+                display: inline;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="canvas-container">
+            <canvas id="myCanvas" width="1000" height="100">
+            </canvas>
+        </div>
+        <div class="container" style="background:linear-gradient(to bottom right, #abbaab, white);font-family:Comic Sans MS;color:#b58863;font-size:25px">
+            <div class="row">
+                <div class="col-md-8" style="border: 1px solid #f0d9b5;border-radius:25px;border-color:#b58863">
+                    <div id="board" style="width: 80%; margin: auto; margin-top: 30px"></div>
+                    <div style="margin: auto; margin: 4%">
+                        <div id="player"></div>
+                        <div id="roomNumbers" style="font-family:Comic Sans MS;color:#b58863;font-size:30px">Enter a room number between 0 and 99</div>
+                        <form>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <input type="number" id="room" min="0" max="99" 
+                                           class="form-control form-control-md number">
+                                </div>
+                                <div class="col-md-2" style="font-family:Comic Sans MS;color:#b58863;font-size:35px">
+                                    <button id="button" style="font-family:Comic Sans MS;color:#b58863;background:#f0d9b5" class="btn btn-success" onclick="connect()">Connect</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="state" style="font-family:Comic Sans MS;color:#b58863;font-size:30px">Join Game</div>
+                    </div>
+                </div>
+                <div class="col-md-4" style="border: 1px solid #f0d9b5;border-radius:25px;border-color:#b58863">
+                    <div class="row">
+                        <div id="messageArea" class="col-md-12">
+                            <div class="chat" id="chat" style="margin-bottom: 3px; "></div>
+                        </div>
+                        <form id="messageForm" class="col-md-12">
+                            <div class="form-group" style="border: auto;font-color:#b58863;font-family:Comic Sans MS;font-size:30px;border-radius:25px;">
+                                <label>Enter Message</label>
+                                <textarea class="form-control" id="message" >
+                                </textarea>
+                                <br />
+                                <input style="font-family:Comic Sans MS;color:#b58863;background:#f0d9b5" type="submit" class="btn btn-primary" value="Send Message"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="userFormArea" class="row">
+                        <div class="col-md-12">
+                            <form id="userForm">
+                                <div class="form-group" style="font-family:Comic Sans MS;color:#b58863;font-size:30px">
+                                    <label>Enter Username</label>
+                                    <input class="form-control" id="username"/>
+                                    <br />
+                                    <input style="font-family:Comic Sans MS;color:#b58863;background:#f0d9b5" type="submit" class="btn btn-primary" value="Login" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="./script.js"></script>
+    </body>
+</html>
