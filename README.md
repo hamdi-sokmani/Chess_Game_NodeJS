@@ -16,3 +16,6 @@ Il suffit de cloner ce dépôt, puis de lancer
 npm install
 node server.js
 ```
+1- Donner le nom d'utilisateur et le numero du salon souhaité.
+2- appuyer sur login et connect pour enregister le nom et acceder au salon avec le numero de salon souhaité. ( Alert dans le cas où le salon choisi est plein ) 
+3- Aucours du jeu vous pouvez envoyer un message à l'aide du boite du chat à droite
